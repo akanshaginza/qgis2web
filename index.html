@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 675px;
+            height: 743px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+	<h2>NDVI DATA</h2>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[36.215263539283605,139.92532616367518],[36.22706404944354,139.93858100418754]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_satellite_0');
+        map.getPane('pane_satellite_0').style.zIndex = 400;
+        var layer_satellite_0 = L.tileLayer('https://api.maptiler.com/tiles/satellite/{z}/{x}/{y}.jpg?key=ez8sQloieXkxdHP7mU1S', {
+            pane: 'pane_satellite_0',
+            opacity: 1.0,
+            attribution: '<a href=""><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_satellite_0;
+        map.addLayer(layer_satellite_0);
+        map.createPane('pane_ndvi_clip_2');
+        map.getPane('pane_ndvi_clip_2').style.zIndex = 402;
+        var img_ndvi_clip_2 = 'data/ndvi_clip_2.png';
+        var img_bounds_ndvi_clip_2 = [[36.220301128009176,139.9291359667135],[36.221959430073866,139.93316289189022]];
+        var layer_ndvi_clip_2 = new L.imageOverlay(img_ndvi_clip_2,
+                                              img_bounds_ndvi_clip_2,
+                                              {pane: 'pane_ndvi_clip_2'});
+        bounds_group.addLayer(layer_ndvi_clip_2);
+        map.addLayer(layer_ndvi_clip_2);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
