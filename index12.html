@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 793px;
+            height: 417px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>NDVI DATA</h2>
+            <div id="map">
+            </div>
+            <a href="./main.html">Return to main page</a>
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[35.56706997118714,140.2770678586418],[35.56790704168831,140.279001068086]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_20200910_ac_36m_NDVI_0');
+        map.getPane('pane_20200910_ac_36m_NDVI_0').style.zIndex = 400;
+        var img_20200910_ac_36m_NDVI_0 = 'data/20200910_ac_36m_NDVI_0.png';
+        var img_bounds_20200910_ac_36m_NDVI_0 = [[35.567183541232815,140.2772936059778],[35.567795934759594,140.27877533837065]];
+        var layer_20200910_ac_36m_NDVI_0 = new L.imageOverlay(img_20200910_ac_36m_NDVI_0,
+                                              img_bounds_20200910_ac_36m_NDVI_0,
+                                              {pane: 'pane_20200910_ac_36m_NDVI_0'});
+        bounds_group.addLayer(layer_20200910_ac_36m_NDVI_0);
+        map.addLayer(layer_20200910_ac_36m_NDVI_0);
+        map.createPane('pane_20200910_ac_36m_RGB_1');
+        map.getPane('pane_20200910_ac_36m_RGB_1').style.zIndex = 401;
+        var img_20200910_ac_36m_RGB_1 = 'data/20200910_ac_36m_RGB_1.png';
+        var img_bounds_20200910_ac_36m_RGB_1 = [[35.56718108061395,140.27734409950153],[35.5677600527047,140.2787608149883]];
+        var layer_20200910_ac_36m_RGB_1 = new L.imageOverlay(img_20200910_ac_36m_RGB_1,
+                                              img_bounds_20200910_ac_36m_RGB_1,
+                                              {pane: 'pane_20200910_ac_36m_RGB_1'});
+        bounds_group.addLayer(layer_20200910_ac_36m_RGB_1);
+        map.addLayer(layer_20200910_ac_36m_RGB_1);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
