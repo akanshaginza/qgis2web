@@ -18,6 +18,8 @@
     </head>
     <body>
         <h2>NDVI DATA</h2>
+        NDVI: <input type="checkbox" id="check" name="check" value="check" checked/> 
+        RGB: <input type="checkbox" id="check1" name="check" value="check" checked/> 
         <div id="map">
         </div>
         <a href="./main.html">Return to main page</a>
@@ -48,7 +50,11 @@
                                               img_bounds_20200910_n_18m_RGB_0,
                                               {pane: 'pane_20200910_n_18m_RGB_0'});
         bounds_group.addLayer(layer_20200910_n_18m_RGB_0);
-        map.addLayer(layer_20200910_n_18m_RGB_0);
+        document.querySelector("#check1").addEventListener('change', function() {
+        if(this.checked) map.addLayer(layer_20200910_n_18m_RGB_0);
+        else map.removeLayer(layer_20200910_n_18m_RGB_0);
+        })
+        //map.addLayer(layer_20200910_n_18m_RGB_0);
         map.createPane('pane_20200910_n_18m_NDVI_1');
         map.getPane('pane_20200910_n_18m_NDVI_1').style.zIndex = 401;
         var img_20200910_n_18m_NDVI_1 = 'data/20200910_n_18m_NDVI_1.png';
@@ -57,6 +63,10 @@
                                               img_bounds_20200910_n_18m_NDVI_1,
                                               {pane: 'pane_20200910_n_18m_NDVI_1'});
         bounds_group.addLayer(layer_20200910_n_18m_NDVI_1);
+        document.querySelector("#check").addEventListener('change', function() {
+        if(this.checked) map.addLayer(layer_20200910_n_18m_NDVI_1);
+        else map.removeLayer(layer_20200910_n_18m_NDVI_1);
+        })
         map.addLayer(layer_20200910_n_18m_NDVI_1);
         setBounds();
         L.ImageOverlay.include({

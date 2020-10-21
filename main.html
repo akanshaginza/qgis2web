@@ -35,5 +35,24 @@
         <a href="./index9.html">20200922_下大和田</as>
         <a href="./index10.html">20200922_下大和田</a>
         <a href="./index11.html">20201002_下大和田</a>  
-    </div>      
+    </div>
+    <script>
+        var ConvertTiff = require('tiff-to-png');
+        var options = {
+            logLevel : 1
+        };
+        var converter = new ConvertTiff(options);
+        var tiffs = [
+            'data/20200910_ac_18m_NDVI_0.tiff',
+            'data/20200910_ac_36m_RGB_0.tiff',
+            'data/20200922_ac_18m_NDVI_1.tiff',
+            'data/20200922_ac_36m_NDVI_1.tiff',
+            'data/20200922_n_18m_NDVI_1.tiff',
+            'data/20201002_ac_18m_NDVI_1.tiff',
+            'data/20201002_n_36m_NDVI_1.tiff',
+        ];
+        var loaction = 'data';
+        converter.convertArray(tiffs, location);
+    </script>
+    </script>      
 </body>
